@@ -1,0 +1,94 @@
+<div class="text-layout">
+  <h1>Pipes no tan comunes</h1>
+  <p>Pipes incluidos en Angular - Usualmente en el Common Module.</p>
+</div>
+
+<div class="p-grid">
+  <div class="p-col p-md-6">
+    <p-fieldset legend="i18nSelect Pipe" [toggleable]="true">
+      <!-- En este caso utilizamos este pipe para cambiar el genero -->
+      <!-- "invitacionMap" es un objeto que tiene dos propiedades en cada caso de fem o masc -->
+      <p>
+        Saludos {{ nombre }}, es un placer
+        {{ genero | i18nSelect: invitacionMap }} a nuestro evento
+      </p>
+      <button
+        pButton
+        class="p-button-danger"
+        label="Cambiar cliente"
+        (click)="cambiarCliente()"
+        icon="pi pi-refresh"
+        iconPos="left"
+      ></button>
+    </p-fieldset>
+  </div>
+
+  <!-- p-col: usa distribucion de columnas de prime, y en especifico utiliza 6 de las 12 columnas(osea la mitad) -->
+  <div class="p-col p-md-6">
+    <p-fieldset legend="i18nPlural Pipe" [toggleable]="true">
+      <p>Actualmente {{ clientes.length | i18nPlural: clientesMap }}</p>
+
+      <button
+        pButton
+        class="p-button-help"
+        label="Borrar cliente"
+        (click)="borrarCliente()"
+        icon="pi pi-trash"
+        iconPos="left"
+      ></button>
+    </p-fieldset>
+  </div>
+  <div class="p-col p-md-6">
+    <!-- toogleable: para comprimir el modulo -->
+    <p-fieldset legend="Slice Pipe" [toggleable]="true">
+      <b>Original</b>
+      <pre>{{ clientes }}</pre>
+      <!-- este pipe nos permite seleccionar de donde a donde queremos mostrar ya sea un array o un string el primer valor es incluyente y el segundo excluyente -->
+      <b>slice:0:2</b>
+      <pre>{{ clientes | slice: 0:2 }}</pre>
+
+      <b>slice:1:2</b>
+      <pre>{{ clientes | slice: 1:2 }}</pre>
+      <b>slice:1:3</b>
+      <pre>{{ clientes | slice: 1:3 }}</pre>
+      <b>slice:3:3</b>
+      <pre>{{ clientes | slice: 3:3 }}</pre>
+      <b>slice:3:4</b>
+      <pre>{{ clientes | slice: 3:4 }}</pre>
+      <b>slice:0:4</b>
+      <pre>{{ "Edgar" | uppercase | slice: 0:4 }}</pre>
+    </p-fieldset>
+  </div>
+  <div class="p-col p-md-6">
+    <!-- toogleable: para comprimir el modulo -->
+    <p-fieldset legend="Json Pipe" [toggleable]="true">
+      <ul>
+        <!-- json pipe: puede imprimir objetos y arreglos en formato json -->
+        <pre>{{ heroes | json }}</pre>
+      </ul>
+    </p-fieldset>
+  </div>
+
+  <div class="p-col p-md-6">
+    <!-- toogleable: para comprimir el modulo -->
+    <p-fieldset legend="KeyValue Pipe" [toggleable]="true">
+      <ul>
+        <li *ngFor="let item of persona | keyvalue">
+          <!-- basicamente nos permite acceder a los valor de un objeto "literal" con un ng for comunmente esto no se puede hacer mas que con un array y este pipe nos permite hacerlo -->
+          <b> {{ item.key | titlecase }}: </b> {{ item.value }}
+        </li>
+      </ul>
+    </p-fieldset>
+  </div>
+  <div class="p-col p-md-6">
+    <!-- toogleable: para comprimir el modulo -->
+    <p-fieldset legend="Async Pipe" [toggleable]="true">
+      <pre *ngIf="!(valorPromesa | async)">Resolviendo Observable</pre>
+      <pre>{{ miObservable | async }}</pre>
+
+      <!-- el ! significa que esta negando el valor mas no la promesa-->
+      <pre *ngIf="!(valorPromesa | async)">Resolviendo promesa</pre>
+      <pre>{{ valorPromesa | async }}</pre>
+    </p-fieldset>
+  </div>
+</div>
